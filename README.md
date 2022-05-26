@@ -165,3 +165,66 @@ $ gist REPORT.md
 ```
 Copyright (c) 2015-2021 The ISC Authors
 ```
+
+## Выполнение работы
+установка на Parrot OS
+```sh
+sudo apt install docker.io
+```
+
+основные команды и флаги
+```sh
+  -it
+  -h (--hostname)
+  --name
+  -d
+  -p
+  inspect
+  logs
+  run
+  diff
+  ps -a (ps)
+  rm
+```
+основные инструкции в Docker-файлах
+```sh
+  FROM
+  RUN
+  ENTRYPOINT
+  ENV
+  COPY
+  WORKDIR
+  VOLUME
+```
+
+# Пример Docker-файла (основанного на репозиториях из 4-5 лаб)
+
+```sh
+vim Dockerfile
+```
+```sh
+FROM ubuntu:18.04
+RUN apt update
+RUN apt install -yy gcc g++ cmake
+
+COPY . print/
+WORKDIR print
+
+RUN cmake -H. -B_build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=_install
+RUN cmake --build _build
+#RUN cmake --build _build --target install
+
+ENV LOG_PATH /home/logs/log.txt
+
+VOLUME /home/logs
+
+WORKDIR _install/bin
+
+ENTRYPOINT ./demo
+```
+```sh
+docker build -t logger .
+```
+
+
+
