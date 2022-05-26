@@ -197,12 +197,12 @@ sudo apt install docker.io
   VOLUME
 ```
 
-# Пример Docker-файла (основанного на репозиториях из 4-5 лаб)
+### Пример Docker-файла (основанного на репозиториях из 4-5 лаб)
 
 ```sh
 vim Dockerfile
 ```
-```sh
+```dockerfile
 FROM ubuntu:18.04
 RUN apt update
 RUN apt install -yy gcc g++ cmake
@@ -222,7 +222,7 @@ WORKDIR _install/bin
 
 ENTRYPOINT ./demo
 ```
-```sh
+```
 docker build -t logger .
 ```
 
